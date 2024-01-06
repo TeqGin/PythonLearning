@@ -1,4 +1,5 @@
 import asyncio
+import threading
 import websockets
 
 async def echo(websocket, path):
@@ -13,6 +14,14 @@ async def srv(websocket, path):
     print(s)
     await websocket.send(s)
 
-asyncio.get_event_loop().run_until_complete(
-  websockets.serve(srv, 'localhost', 8765))
-asyncio.get_event_loop().run_forever()
+def serve():
+  loop = asyncio.new_event_loop()
+  asyncio.set_event_loop(loop)
+  loop.run_until_complete(
+    websockets.serve(srv, 'localhost', 8765)
+  )
+  loop.run_forever()
+
+t1 = threading.Thread(target=serve)
+t1.start()
+t1.join()
