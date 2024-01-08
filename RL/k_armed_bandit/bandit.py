@@ -7,9 +7,9 @@ def startGamble(bandit):
   return random_normal
 
 def chooseBandit(reward1, reward2):
-  if abs(reward1-reward2) <= 10:
-    ran = random.randint(0,99)
-    if ran == 50:
+  if abs(reward1-reward2) <= 20:
+    ran = random.randint(0,20)
+    if ran == 10:
       if reward1 > reward2:
         return 2
       else:
@@ -24,7 +24,7 @@ def chooseBandit(reward1, reward2):
 def startLearning():
   bandit1 = (500, 50)
   bandit2 = (550, 100)
-  gambleTime = 100000
+  gambleTime = 1000000
   reward1 = 1000
   reward2 = 1000
   cnt1 = 1
@@ -38,7 +38,7 @@ def startLearning():
       r = startGamble(bandit2)
       reward2 = ((reward2 * cnt2) + r)/(cnt2+1)
       cnt2 += 1
-  print(reward1,reward2)
+  print(cnt1, reward1,cnt2, reward2)
 
 def main():
   startLearning()
