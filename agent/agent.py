@@ -15,12 +15,11 @@ load_dotenv()
 # 1. 创建工具集
 def create_tools():
     search = SerpAPIWrapper()  # 需要 SERPAPI_API_KEY
-
     tools = [
         Tool(
             name="Search",
             func=search.run,
-            description="用于搜索最新信息，比如当前事件、天气等"
+            description="用于搜索最新信息，比如当前事件、天气、股票信息等"
         ),
         Tool(
             name="Calculator",
@@ -79,7 +78,7 @@ def create_llm():
         model_name="deepseek-reasoner",
         openai_api_base="https://api.deepseek.com/v1",
         openai_api_key=os.getenv("DEEPSEEK_API_KEY"),
-        temperature=0.8,
+        temperature=1,
         max_tokens=4000
     )
 
